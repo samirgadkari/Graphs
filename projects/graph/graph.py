@@ -118,12 +118,12 @@ class Graph:
                 # of the queue
                 for neighbor in self.vertices[v]:
                     # Copy the path
+                    p = list(path)
                     # Append neighbor to the back of the copy
+                    p.append(neighbor)
                     # Enqueue copy
-                    path.append(neighbor)
-                    if path[-1] == destination_vertex:
-                        return path
-                    q.enqueue(path)
+                    q.enqueue(p)
+                    # q.enqueue(path)
 
     def dfs(self, starting_vertex, destination_vertex):
         """
@@ -153,12 +153,11 @@ class Graph:
                 # of the queue
                 for neighbor in self.vertices[v]:
                     # Copy the path
+                    p = list(path)
                     # Append neighbor to the back of the copy
+                    p.append(neighbor)
                     # Enqueue copy
-                    path.append(neighbor)
-                    if path[-1] == destination_vertex:
-                        return path
-                    s.push(path)
+                    s.push(p)
 
 
 if __name__ == '__main__':
