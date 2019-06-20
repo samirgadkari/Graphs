@@ -112,7 +112,19 @@ class SocialGraph:
 
 if __name__ == '__main__':
     sg = SocialGraph()
-    sg.populateGraph(10, 2)
+    network_size = 1000
+    avg_connections = 5
+    sg.populateGraph(network_size, avg_connections)
     print(sg.friendships)
     connections = sg.getAllSocialPaths(1)
     print(connections)
+
+    extended_network_len = len(connections.keys())
+    print(f'Percentage of friends compared to entire network: '
+          f'{extended_network_len/network_size*100}')
+
+    total_separation = 0
+    for _, v in connections.items():
+        # This is just because we include the initial user
+        total_separation += (len(v) - 1)
+    print(f'Average separation: {total_separation/extended_network_len}')
