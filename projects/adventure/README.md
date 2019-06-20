@@ -1,4 +1,4 @@
-## Description
+# Description
 
 You are provided with a pre-generated graph consisting of 500 rooms. You are responsible for filling `traversalPath` with directions that, when walked in order, will visit every room on the map at least once.
 
@@ -55,4 +55,8 @@ If all paths have been explored, you're done!
 
 It is very difficult to calculate the shortest possible path that traverses the entire graph. Why?
 
+  * Finding the shortest path requires you to try all paths. Since there are 4 possible directions for each room, your paths to search expand geometrically: 4 paths for 1 room, 16 for 2 rooms, 64 for 3 rooms. So, for 500 rooms, you need to search 4^500 paths. That is 1 x 10^301.  No computer yet can do this
+  
 My best path is 990 moves. Can you find a shorter path?
+
+  * My default code found 1010 moves for 500 rooms. Tried reversing the directions returned by getExits(), but still required 1010 moves. I guess one possible way to do this is in each room, try the different sequences of directions while keeping the number of steps required to reach a room from this original room. Then pick the lowest number of steps to reach the room.

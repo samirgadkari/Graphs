@@ -2209,9 +2209,6 @@ def travel(p, came_from, visited):
 
     visited.add(cur_room.id)
 
-    # if len(traversalPath) == len(roomGraph.keys()):
-    #     return
-
     for d in cur_room.getExits():
         if (came_from != '') and (d == opposite_dir[came_from]):
             continue
