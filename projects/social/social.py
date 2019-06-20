@@ -77,31 +77,42 @@ class SocialGraph:
 
         The key is the friend's ID and the value is the path.
         """
-        # visited = {}
-        # paths = {}
-        # cur_path = []
-        # level = 0
-        # q = collections.deque([(userID, level)])
-        # while len(q) > 0:
-        #     e, l = q.popleft()
 
-        #     if e.name not in visited.keys():
+        def go(user_ids, cur_path, paths):
 
-        #         level += 1
-        #         friends = collections.deque(
-        #             [(x.name, level) for x in self.friendships[e.name]])
-        #         level -= 1
-        #         visited[e.name] = level
-        #         q.extend(friends)
-        #         paths[e.name] = cur_path[:level + 1].append(e.name)
+            # print(
+            #     f'user_ids: {user_ids}, cur_path: {cur_path}, paths: {paths}')
 
-        # return visited
+            def all_ids_handled(ids, paths):
+                for id in ids:
+                    if id not in paths:
+                        return False
+                return True
+
+            if (len(user_ids) == 0):
+                return paths
+            if all_ids_handled(user_ids, paths):
+                return paths
+
+            visit = {}
+            for id in user_ids:
+                if id not in paths.keys():
+                    temp_path = cur_path.copy()
+                    temp_path.append(id)
+                    paths[id] = temp_path
+                    visit[id] = temp_path
+
+            for id in visit.keys():
+                children = list(self.friendships[id])
+                paths = go(children, visit[id], paths)
+            return paths
+
+        return go([userID], [], dict())
 
 
 if __name__ == '__main__':
     sg = SocialGraph()
     sg.populateGraph(10, 2)
     print(sg.friendships)
-    exit(0)
     connections = sg.getAllSocialPaths(1)
     print(connections)
