@@ -48,9 +48,13 @@ Note that in this sample, Users 3, 4 and 9 are not in User 1's extended social n
 
 1. To create 100 users with an average of 10 friends each, how many times would you need to call `addFriendship()`? Why?
 
+We would need to call the function 1000 times. This is because for each friend, we would call the function 10 times to make 10 friends. Since we're doing this for each user, we would have to call the function at least 1000 times.  I did it using random.shuffle(). For this reason, I called the function O(n^2) times, and then shuffled the list to get a random set of friendships.
+
 2. If you create 1000 users with an average of 5 random friends each, what percentage of other users will be in a particular user's extended social network? What is the average degree of separation between a user and those in his/her extended network?
 
-
+To answer this question, I created the network and calculated the answer as:
+  * % of other users in your network was around 99% depending on the run.
+  * Average degree os separation between user and others was around 120, depending on the run
 
 ## 4. Stretch Goal
 
